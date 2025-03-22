@@ -1,10 +1,13 @@
 const express = require('express')
 require('dotenv').config()
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 const productRouter = require('./Products/productRouter')
 const app = express()
 const uri = process.env.uri
 const port = process.env.port || 8080
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:false}))
 app.get('/', (req, res) => res.status(200).send('The API is working normally!'))
 app.use('/products', productRouter)
 mongoose.connect(uri, {dbName:"ecommerce"}).then(()=> console.log('Connected to mongodb')).catch(err => console.error(err))

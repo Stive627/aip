@@ -2,7 +2,7 @@ const ProductModel = require("./product")
 
 const addProduct = async(req, res) => {
     const {name, price, category} = req.body
-    if(!name, !price, !category){
+    if(!name || !price || !category){
         return res.status(400).send('The fields are missing.')
     }
     const newProduct = new ProductModel({...req.body})
